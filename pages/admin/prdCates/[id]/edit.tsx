@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { AdminLayout } from "../../../../layouts";
 import { NextPageWithLayout } from "../../../../models/layout";
-import { getprdCate, updateprdCate } from "../../../../redux/prdCateSlice";
+import { getprdCate, getprdCates, updateprdCate } from "../../../../redux/prdCateSlice";
 import { uploadImage } from "../../../../untils";
 
 type Props = {};
@@ -33,14 +33,14 @@ const AddUser: NextPageWithLayout = (props: Props) => {
         formState: { errors },
         reset,
     } = useForm<Inputs>();
-
+   
+    
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
         try {
             if (typeof values.image === "object") {
                 const { data } = await uploadImage(values.image[0]);
                 values.image = data.url;
             }
-
             await dispatch(updateprdCate(values)).unwrap();
             toast.success("Cập nhật danh mục thành công");
             router.push("/admin/prdCates");
@@ -48,17 +48,15 @@ const AddUser: NextPageWithLayout = (props: Props) => {
             console.log(error);
         }
     };
+    const {prdCates} = useSelector((state:any)=>state.prdCate)
+    const prdCate = prdCates.find((item:any)=>item._id === id)
+    console.log(prdCate);
+    
     useEffect(() => {
-        (async () => {
-            try {
-                const prdCate = await dispatch(getprdCate(id)).unwrap();
-                reset(prdCate);
-                setPreview(prdCate.image);
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-    }, [dispatch, id, reset]);
+        dispatch(getprdCates())
+        reset(prdCate);
+        setPreview(prdCate.image);
+    }, [dispatch, id]);
     return (
         <>
             <Head>
@@ -152,9 +150,7 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                                                     <span>Upload a file</span>
                                                     <input
                                                         id="form__add-user-avatar"
-                                                        {...register("image", {
-                                                            required: "Vui lòng chọn ảnh",
-                                                        })}
+                                                        {...register("image",)}
                                                         onChange={(e: any) => {
                                                             setPreview(
                                                                 URL.createObjectURL(e.target.files[0])
@@ -183,7 +179,7 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 {" "}
-                                Thêm tài khoản{" "}
+                                sửa danh mục{" "}
                             </button>
                         </div>
                     </div>

@@ -41,7 +41,7 @@ const EditBlogCate: NextPageWithLayout = (props: Props) => {
                 const { data } = await uploadImage(values.slug[0]);
                 values.slug = data.url;
             }
-
+            
             await dispatch(updateBlogCate(values)).unwrap();
             toast.success("Cập nhật  thành công");
             router.push("/admin/blogCates");

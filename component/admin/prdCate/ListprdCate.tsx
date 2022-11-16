@@ -85,9 +85,9 @@ const PrdCateList = (props: Props) => {
                         <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0 h-10 w-10">
-                                    <div className="w-40 h-40 relative rounded-full object-cover">
+                                    <div className="w-40 h-40 relative object-cover ">
                                         {item.image && (
-                                            <img src={item.image} alt="" className="rounded-full" />
+                                            <img src={item.image} width="120px" alt="" />
                                         )}
                                     </div>
                                 </div>
