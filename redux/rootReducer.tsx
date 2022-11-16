@@ -9,6 +9,7 @@ import prdReducer from "./prdSlice";
 import prdColorReducer from "./prdColorSlice";
 import prdAmountReducer from "./prdAmountSlice";
 import prdSizeReducer from "./prdSizeSlice";
+import prdCateReducer from "./prdCateSlice";
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   prd : prdReducer,
   prdColor: prdColorReducer,
   prdAmount: prdAmountReducer,
-  prdSize: prdSizeReducer
+  prdSize: prdSizeReducer,
+  prdCate: prdCateReducer
 });
 
 export default rootReducer;
