@@ -89,11 +89,11 @@ const BlogList = (props: Props) => {
             filters: 
             blogsFilter
         },
-        // {
-        //     title: 'Quantity',
-        //     dataIndex: 'quantity',
-        //     key: 'quantity',
-        // },
+        {
+            title: 'Quantity',
+            dataIndex: 'quantity',
+            key: 'quantity',
+        },
          {
             title: 'Desc',
             dataIndex: 'desc',
