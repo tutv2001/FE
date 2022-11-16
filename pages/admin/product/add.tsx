@@ -13,23 +13,24 @@ import { RootState } from "../../../redux/store";
 // import { addUser } from "../../../redux/userSlice";
 import { uploadImage } from "../../../untils";
 import dynamic from "next/dynamic";
+import { getprdCates } from "../../../redux/prdCateSlice";
+import { addProduct } from "../../../redux/prdSlice";
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 type Props = {};
 
 type Inputs = {
-  title: string;
-  slug: string;
+  name: string;
+  price: number;
   desc: string;
-  content: string;
   categoryId: string;
-  thumbnail: {
+  image: {
     0: File;
   };
 };
 
-const AddBlog: NextPageWithLayout = (props: Props) => {
+const AddPrd: NextPageWithLayout = (props: Props) => {
   const [preview, setPreview] = useState<string>();
-  const blogCate = useSelector((state: RootState) => state.blogCate.blogCates);
+  const prdCate = useSelector((state: RootState) => state.prdCate.prdCates);
   const dispatch = useDispatch<any>();
   const editor = useRef(null);
   const [content, setContent] = useState("");
@@ -67,14 +68,14 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
   } = useForm<Inputs>();
 
   useEffect(() => {
-    dispatch(getBlogCates());
+    dispatch(getprdCates());
   }, [dispatch]);
 
   const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
     try {
-      const { data } = await uploadImage(values.thumbnail[0]);
-      values.thumbnail = data.url;
-      await dispatch(addBlog({ ...values, content: content })).unwrap();
+      const { data } = await uploadImage(values.image[0]);
+      values.image = data.url;
+      await dispatch(addProduct({ ...values})).unwrap();
       toast.success("Thêm bài viết thành công");
       reset();
       setPreview("");
@@ -113,20 +114,33 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
               <div className="grid grid-cols-6 gap-3">
                 <div className="col-span-6">
                   <label htmlFor="form__add-user-fullname" className="block text-sm font-medium text-gray-700">
-                    Title
+                    Tên
                   </label>
                   <input
                     type="text"
-                    {...register("title", { required: "Vui lòng không để trống" })}
+                    {...register("name", { required: "Vui lòng không để trống" })}
                     id="form__add-user-fullname"
                     className="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     placeholder=""
                   />
-                  <div className="text-sm mt-0.5 text-red-500">{errors.title?.message}</div>
+                  <div className="text-sm mt-0.5 text-red-500">{errors.name?.message}</div>
                 </div>
                 <div className="col-span-6">
                   <label htmlFor="form__add-user-fullname" className="block text-sm font-medium text-gray-700">
-                    Desc
+                    Giá
+                  </label>
+                  <input
+                    type="number"
+                    {...register("price", { required: "Vui lòng không để trống" })}
+                    id="form__add-user-fullname"
+                    className="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    placeholder=""
+                  />
+                  <div className="text-sm mt-0.5 text-red-500">{errors.price?.message}</div>
+                </div>
+                <div className="col-span-6">
+                  <label htmlFor="form__add-user-fullname" className="block text-sm font-medium text-gray-700">
+                    Mô tả
                   </label>
                   <input
                     type="text"
@@ -135,7 +149,7 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
                     className="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     placeholder=""
                   />
-                  <div className="text-sm mt-0.5 text-red-500">{errors.title?.message}</div>
+                  <div className="text-sm mt-0.5 text-red-500">{errors.desc?.message}</div>
                 </div>
 
                 <div className="col-span-6 md:col-span-3">
@@ -144,7 +158,7 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
                   </label>
                   <select {...register("categoryId", { required: true })}>
                     <option className="py-1">Categorys</option>
-                    {blogCate.map((item: any, index: any) => {
+                    {prdCate.map((item: any, index: any) => {
                       return (
                         <option key={index} className="py-1" value={item._id}>
                           {item.name}
@@ -208,7 +222,7 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
                           <span>Upload a file</span>
                           <input
                             id="form__add-user-avatar"
-                            {...register("thumbnail", {
+                            {...register("image", {
                               required: "Vui lòng chọn ảnh",
                             })}
                             onChange={(e: any) => {
@@ -223,7 +237,7 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
                       <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                     </div>
                   </div>
-                  <div className="text-sm mt-0.5 text-red-500">{errors.thumbnail?.message}</div>
+                  <div className="text-sm mt-0.5 text-red-500">{errors.image?.message}</div>
                 </div>
               </div>
             </div>
@@ -243,6 +257,6 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
   );
 };
 
-AddBlog.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+AddPrd.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
-export default AddBlog;
+export default AddPrd;

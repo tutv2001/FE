@@ -12,6 +12,8 @@ import { RootState } from "../../../redux/store";
 import { formatDate } from "../../../untils";
 import { getBlogCates } from "../../../redux/blogCateSlice";
 import { Tblog } from "../../../models/blogs";
+import { getProducts } from "../../../redux/prdSlice";
+import { getprdCates } from "../../../redux/prdCateSlice";
 
 type Props = {};
 interface DataType {
@@ -23,17 +25,17 @@ interface DataType {
 }
 
 const BlogList = (props: Props) => {
-    const blogs = useSelector((state: RootState) => state.blog.blogs);
-    const blogCate = useSelector((state: RootState) => state.blogCate.blogCates);
+    const products = useSelector((state: RootState) => state.prd.products);
+    const prdCate = useSelector((state: RootState) => state.prdCate.prdCates);
     const dispatch = useDispatch<any>();
 
     useEffect(() => {
-        dispatch(getBlogs());
-        dispatch(getBlogCates());
+        dispatch(getProducts());
+        dispatch(getprdCates());
     }, [dispatch]);
-    console.log(blogCate);
+    console.log(prdCate);
     
-    const blogsFilter = blogCate?.map((item) => {
+    const blogsFilter = prdCate?.map((item) => {
        return  {
             text: item.name, value:  item.name ,
        }
@@ -66,10 +68,29 @@ const BlogList = (props: Props) => {
             render: text => <a>{text}</a>,
         },
         {
-            title: 'Name',
-            dataIndex: ' name',
-            key: ' name',
+            title: 'Title',
+            dataIndex: 'title',
+            key: 'title',
             render: text => <a>{text}</a>,
+        },
+        // {
+        //     title: 'Content',
+        //     dataIndex: 'content',
+        //     key: 'content',
+        // },
+        {
+            title: 'Price',
+            dataIndex: 'price',
+            key: 'price',
+        },
+        {
+            title: 'Category',
+            dataIndex: 'category',
+            key: 'category',
+            filters: 
+            blogsFilter
+            ,
+            onFilter: (value:any, record: any): any => record.category.includes(value),
         },
         {
             title: 'Image',
@@ -77,39 +98,21 @@ const BlogList = (props: Props) => {
             key: 'image',
             render: img => <img src={img} width='120' alt="" />,
         },
-        {
-            title: 'Price',
-            dataIndex: ' price',
-            key: ' price',
-        },
-        {
-            title: 'Category',
-            dataIndex: 'categoryId',
-            key: 'categoryId',
-            filters: 
-            blogsFilter
-        },
-        {
-            title: 'Quantity',
-            dataIndex: 'quantity',
-            key: 'quantity',
-        },
-         {
-            title: 'Desc',
-            dataIndex: 'desc',
-            key: 'desc',
-        },
        
         {
             title: 'Action',
             key: 'action',
             render: item => (
 
-                <><Link href={`/admin/blogs/${item.action._id}/edit`}>
+                <><Link href={`/admin/product/${item.action._id}/edit`}>
                     <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Edit
                     </span>
-                </Link><button
+                </Link><Link href={`/admin/product/${item.action._id}/info`}>
+                        <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Xem chi tết
+                        </span>
+                    </Link><button
                         onClick={() => handleRemove(item.action._id)}
                         className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
                     >
@@ -119,19 +122,20 @@ const BlogList = (props: Props) => {
         },
     ];
 
-    const data: any = blogs?.map((item, index) => {
+    const data: any = products?.map((item, index) => {
         return {
             stt: index,
-           Name: item.title,
-            content: item.desc,
+            title: item.name,
+            // content: item.desc,
+            price: item.price,
             category: item.categoryId.name,
-            image: item.thumbnail,
+            image: item.image,
             action: item
         }
     })
     return (
         <Table columns={columns} dataSource={data} />
-
+        
     );
 };
 
