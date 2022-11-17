@@ -134,6 +134,30 @@ const AdminMenu = (props: Props) => {
             </div>
           </span>
         </Link>
+        <Link href="/admin/prdColors">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faThList} />
+              </div>
+              <span>
+                <b>Quản Lý Màu Sắc</b>
+              </span>
+            </div>
+          </span>
+        </Link>
+        <Link href="/admin/prdSizes">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faThList} />
+              </div>
+              <span>
+                <b>Quản Lý Kích Cỡ</b>
+              </span>
+            </div>
+          </span>
+        </Link>
       </nav>
       <button
         className="py-2 w-full text-white font-bold text-md cursor-pointer fixed bottom-0 border-solid border-t-2 border-b-2 border-sky-500"
