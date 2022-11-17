@@ -4,7 +4,9 @@ export interface Tprd {
     image: string
     price?: string |number
     desc?: string
-    categoryId: string
+    categoryId: {
+        name: string
+    }
     sliderId: string
 }
 export interface userErr {
