@@ -14,13 +14,11 @@ const initialState: prdColorState = {
 
 export const getprdColors = createAsyncThunk("PrdColor/getprdColors", async () => {
     const response = await getAll();
-
     return response;
 });
 
 export const deleteprdColor = createAsyncThunk("PrdColor/deleteprdColor", async (id: string) => {
     const res = await remove(id);
-
     return res;
 });
 
@@ -48,7 +46,7 @@ const prdColorSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getprdColors.fulfilled, (state, { payload }) => {
-            state.prdColors = payload || [];
+            state.prdColors = payload ;
         });
 
         builder.addCase(deleteprdColor.fulfilled, (state, { payload }) => {
@@ -56,15 +54,14 @@ const prdColorSlice = createSlice({
         });
 
         builder.addCase(addprdColor.fulfilled, (state, { payload }) => {
-            state.prdColors.push(payload as TprdColor);
+            state.prdColors.push(payload)
         });
-
         builder.addCase(getprdColor.fulfilled, (state, { payload }) => {
-            state.prdColor = payload as TprdColor;
+            state.prdColor = payload;
         });
 
         builder.addCase(updateprdColor.fulfilled, (state, { payload }) => {
-            state.prdColors = state.prdColors = state.prdColors.map((item) => (item._id === payload?._id ? payload : item)) as TprdColor[];
+            state.prdColors = state.prdColors = state.prdColors.map((item) => (item._id === payload?._id ? payload : item)) ;
         });
     },
 });
