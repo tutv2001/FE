@@ -48,68 +48,6 @@ const AdminMenu = (props: Props) => {
           </span>
         </Link>
 
-        <Link href="/admin/hotels">
-          <span className="flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
-            <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
-              <FontAwesomeIcon icon={faHospitalAlt} />
-            </div>
-            <span>
-              <b>Quản Lý Sản Phẩm</b>
-            </span>
-          </span>
-        </Link>
-
-        <Link href="/admin/users">
-          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
-            <div className="flex items-center">
-              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
-                <FontAwesomeIcon icon={faCircleUser} />
-              </div>
-              <span>
-                <b>Quản Lý Người Dùng</b>
-              </span>
-            </div>
-          </span>
-        </Link>
-
-        <Link href="/admin/blogs">
-          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
-            <div className="flex items-center">
-              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
-                <FontAwesomeIcon icon={faNewspaper} />
-              </div>
-              <span>
-                <b>Quản Lý Blog</b>
-              </span>
-            </div>
-          </span>
-        </Link>
-
-        <Link href="/admin/slider">
-          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
-            <div className="flex items-center">
-              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
-                <FontAwesomeIcon icon={faSlidersH} />
-              </div>
-              <span>
-                <b>Quản Lý Banner</b>
-              </span>
-            </div>
-          </span>
-        </Link>
-
-        <Link href="/admin/blogCates">
-          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
-            <div className="flex items-center">
-              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
-                <FontAwesomeIcon icon={faThList} />
-              </div>
-              <span>
-                <b>Quản Lý Danh Mục</b>
-              </span>
-            </div>
-          </span>
-        </Link>
 
         <Link href="/admin/contact">
           <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
@@ -119,6 +57,30 @@ const AdminMenu = (props: Props) => {
               </div>
               <span>
                 <b>Quản lý Đơn Hàng</b>
+              </span>
+            </div>
+          </span>
+        </Link>
+        <Link href="/admin/prdColors">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faThList} />
+              </div>
+              <span>
+                <b>Quản Lý Màu Sắc</b>
+              </span>
+            </div>
+          </span>
+        </Link>
+        <Link href="/admin/prdSizes">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faThList} />
+              </div>
+              <span>
+                <b>Quản Lý Kích Cỡ</b>
               </span>
             </div>
           </span>
