@@ -1,11 +1,37 @@
-import React, { ReactElement } from 'react'
+import { TableProps } from 'antd';
+import { GetStaticProps } from 'next';
+import React, { ReactElement, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { ClientLayout } from '../../layouts'
+import { Tprd } from '../../models/prd';
+import { TprdCate } from '../../models/prdCate';
+import { getProducts } from '../../redux/prdSlice';
+import { RootState } from '../../redux/store';
 import styles from './cate.module.css'
 
 
-type Props = {};
+type Props = {
+  products: Tprd[];
+  cateProduct: TprdCate[];
+};
+interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string[];
+}
+
 
 const Category = (props: Props) => {
+  const products = useSelector((state: RootState) => state.prd.products);
+  const dispatch = useDispatch<any>();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+  const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+  };
   return (
     <>
       <nav className="relative w-[1410px] mx-auto flex flex-wrap items-center justify-between py-8 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 navbar navbar-expand-lg navbar-light">
@@ -140,7 +166,7 @@ const Category = (props: Props) => {
                     </label>
                   </div>
                 </div>
-                <div className="block border-b border-gray-300 pb-7 mb-7">
+                {/* <div className="block border-b border-gray-300 pb-7 mb-7">
                   <h3 className="text-heading text-sm md:text-base font-semibold mb-7">
                     Thương hiệu
                   </h3>
@@ -234,8 +260,8 @@ const Category = (props: Props) => {
                       </span>
                     </label>
                   </div>
-                </div>
-                <div className="block border-b border-gray-300 pb-7 mb-7">
+                </div> */}
+                {/* <div className="block border-b border-gray-300 pb-7 mb-7">
                   <h3 className="text-heading text-sm md:text-base font-semibold mb-7">
                     Giá
                   </h3>
@@ -329,7 +355,7 @@ const Category = (props: Props) => {
                       </span>
                     </label>
                   </div>
-                </div>
+                </div> */}
                 <div className="block pb-7">
                   <h3 className="text-heading text-sm md:text-base font-semibold mb-7">
                     Màu sắc
@@ -459,446 +485,120 @@ const Category = (props: Props) => {
               </div>
             </div>
           </div>
+
           <div className="grid grid-cols-3 gap-[30px] lg:w-3/4 mx-auto pt-6 ml-[30px] ">
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
+            {products?.map((item, index) => (
+              <div className="w-full pb-8" key={index}>
+                <div className="p-0 bg-light group text-center">
+                  <a className="block mb-2" href="#">
+                    <div className="relative overflow-hidden">
+                      <div className="mb-5 overflow-hidden">
+                        <picture>
+                          <img
+                            className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
+                            src={item.image}
+                            alt=""
+                          />
+                        </picture>
+
+                      </div>
+                      <div className="absolute flex flex-col top-4 right-4">
+                        <div className="flex items-center">
+                          <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width={20}
+                              height={20}
+                              fill="currentColor"
+                              className="bi bi-heart"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width={20}
+                              height={20}
+                              fill="currentColor"
+                              className="bi bi-cart2 "
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                            </svg>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
                     </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
+                    <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
+                      {item.name}
+                    </h3>
+                    <p className="text-lg font-semibold text-[#A71010] ">
+                      {/* <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
                       $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
-                </a>
+                    </span> */}
+                      <span>${item.price}</span>
+                    </p>
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
+            ))}
+            <nav aria-label="Page navigation example">
+            <ul className="inline-flex items-center -space-x-px">
+              <li>
+                <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <span className="sr-only">Previous</span>
+                  <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" ></path></svg>
                 </a>
-              </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
+              </li>
+              <li>
+                <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+              </li>
+              <li>
+                <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+              </li>
+              <li>
+                <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+              </li>
+              <li>
+                <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+              </li>
+              <li>
+                <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+              </li>
+              <li>
+                <a href="#" className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <span className="sr-only">Next</span>
+                  <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" ></path></svg>
                 </a>
-              </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg mr-[8px] font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-            <div className="w-full pb-8">
-              <div className="p-0 bg-light group text-center">
-                <a className="block mb-2" href="#">
-                  <div className="relative overflow-hidden">
-                    <div className="mb-5 overflow-hidden">
-                      <img
-                        className="object-cover w-full mx-auto transition-all h-[350px] group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute flex flex-col top-4 right-4">
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 rounded group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-heart"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="relative flex items-center justify-center p-3 mb-3 text-white transition-all translate-x-20 bg-gray-700 group-hover:translate-x-0 wishlist hover:bg-blue-600 group">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={20}
-                            height={20}
-                            fill="currentColor"
-                            className="bi bi-cart2 "
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
-                    Quality Headphones
-                  </h3>
-                  <p className="text-lg font-semibold text-[#A71010] ">
-                    <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
-                      $33.69
-                    </span>
-                    <span>$29.89</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+              </li>
+            </ul>
+          </nav>
+          </div>         
+        </div>        
       </div>
 
     </>
 
   )
 }
+// export const getStaticProps: GetStaticProps = async () => {
+//   const res = await fetch("http://localhost:8000/api/product");
+//   const products = await res.json();
+
+//   const req = await fetch("http://localhost:8000/api/Cateproduct");
+//   const cateProduct = await req.json();
+
+//   return {
+//     props: {
+//       products,
+//       cateProduct,
+//     },
+//     revalidate: 60,
+//   };
+// };
 Category.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
 export default Category
