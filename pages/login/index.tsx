@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { loginnn } from "../../Api/authApi";
 import { Tuser } from "../../models/user";
 import { login } from "../../redux/auth";
+import Link from 'next/link'
 type Props = {};
 
 const Login = (props: Props) => {
@@ -97,12 +98,12 @@ const Login = (props: Props) => {
                   Đăng nhập
                 </button>
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                  <a
-                    href="#!"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                  <Link href="/register">
+                  <a className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
                   >
                     Đăng ký
                   </a>
+                  </Link>
                 </p>
               </div>
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
