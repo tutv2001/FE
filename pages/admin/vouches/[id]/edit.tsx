@@ -19,6 +19,7 @@ type Inputs = {
     code: string;
     status: string ;
     amount: number;
+    time:string;
     percent: number
 };
 
@@ -170,15 +171,15 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                                     </div>
                                 </div>
 
-                                {/* <div className="col-span-6 md:col-span-3">
+                                <div className="col-span-6 md:col-span-3">
                                     <label
                                         htmlFor="form__add-user-phone"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Thời gian tồn tại
+                                        Thời gian hết hạn()
                                     </label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         {...register("time", {
                                             required: "Vui lòng không bỏ trống",
                                         })}
@@ -189,7 +190,7 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                                     <div className="text-sm mt-0.5 text-red-500">
                                         {errors.time?.message}
                                     </div>
-                                </div>                                                                                                                            */}
+                                </div>                                                                                                                             
                             </div>
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
