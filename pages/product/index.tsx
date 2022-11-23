@@ -9,7 +9,6 @@ import { TprdCate } from '../../models/prdCate';
 import { getprdCates } from '../../redux/prdCateSlice';
 import { getProducts } from '../../redux/prdSlice';
 import { RootState } from '../../redux/store';
-import Link from "next/link";
 import styles from './cate.module.css'
 
 
