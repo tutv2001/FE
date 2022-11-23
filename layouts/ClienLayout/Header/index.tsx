@@ -19,14 +19,14 @@ const header = (props: Props) => {
         {/* Nav Links */}
         <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
           <li>
-            <Link href="/home">
+            <Link href="/">
             <a className="hover:text-gray-200" >
               Trang Chủ
             </a>
             </Link>
           </li>
           <li>
-            <Link href="/category">
+            <Link href="/product">
             <a className="hover:text-gray-200" >
               Sản Phẩm
             </a>

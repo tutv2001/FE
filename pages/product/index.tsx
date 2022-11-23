@@ -7,6 +7,7 @@ import { Tprd } from '../../models/prd';
 import { TprdCate } from '../../models/prdCate';
 import { getProducts } from '../../redux/prdSlice';
 import { RootState } from '../../redux/store';
+import Link from "next/link";
 import styles from './cate.module.css'
 
 
@@ -23,7 +24,7 @@ interface DataType {
 }
 
 
-const Category = (props: Props) => {
+const Product = (props: Props) => {
   const products = useSelector((state: RootState) => state.prd.products);
   const dispatch = useDispatch<any>();
   useEffect(() => {
@@ -370,10 +371,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(0, 0, 0)" }}
-                          />
+                          
                           Đen
                         </span>
                       </span>
@@ -387,10 +385,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(51, 16, 206)" }}
-                          />
+                         
                           Xanh dương
                         </span>
                       </span>
@@ -404,10 +399,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(12, 116, 72)" }}
-                          />
+                       
                           Xanh lục
                         </span>
                       </span>
@@ -421,10 +413,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(95, 14, 14)" }}
-                          />
+                       
                           Nâu hạt dẻ
                         </span>
                       </span>
@@ -438,10 +427,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(54, 39, 39)" }}
-                          />
+                       
                           Nâu thường
                         </span>
                       </span>
@@ -455,10 +441,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(255, 255, 255)" }}
-                          />
+                        
                           Trắng
                         </span>
                       </span>
@@ -472,10 +455,7 @@ const Category = (props: Props) => {
                       />
                       <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
                         <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(225, 225, 225)" }}
-                          />
+                       
                           Xám
                         </span>
                       </span>
@@ -533,9 +513,11 @@ const Category = (props: Props) => {
                         </div>
                       </div>
                     </div>
+                    <Link href="">
                     <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
                       {item.name}
                     </h3>
+                    </Link>
                     <p className="text-lg font-semibold text-[#A71010] ">
                       {/* <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
                       $33.69
@@ -600,5 +582,5 @@ const Category = (props: Props) => {
 //     revalidate: 60,
 //   };
 // };
-Category.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
-export default Category
+Product.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
+export default Product
