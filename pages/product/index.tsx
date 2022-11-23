@@ -9,6 +9,7 @@ import { TprdCate } from '../../models/prdCate';
 import { getprdCates } from '../../redux/prdCateSlice';
 import { getProducts } from '../../redux/prdSlice';
 import { RootState } from '../../redux/store';
+import Link from "next/link";
 import styles from './cate.module.css'
 
 
@@ -25,7 +26,7 @@ interface DataType {
 }
 
 
-const Category = (props: Props) => {
+const Product = (props: Props) => {
   const products = useSelector((state: RootState) => state.prd.products);
   const dispatch = useDispatch<any>();
   useEffect(() => {
@@ -99,8 +100,10 @@ const Category = (props: Props) => {
                         name="woman"
                         defaultValue="woman"
                       />
+
                       {item.name}
                     </label>
+
                       </span>
                         ))
                       }
@@ -157,9 +160,11 @@ const Category = (props: Props) => {
                         </div>
                       </div>
                     </div>
+                    <Link href="">
                     <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
                       {item.name}
                     </h3>
+                    </Link>
                     <p className="text-lg font-semibold text-[#A71010] ">
                       {/* <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
                       $33.69
@@ -224,5 +229,5 @@ const Category = (props: Props) => {
 //     revalidate: 60,
 //   };
 // };
-Category.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
-export default Category
+Product.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
+export default Product
