@@ -104,7 +104,7 @@ const BlogList = (props: Props) => {
       dataIndex: "categoryId",
       key: "categoryId",
       filters: productsFilter,
-      onFilter: (value: any, record: any): any => record.categoryId.includes(value),
+      onFilter: (value: any, record: any): any => record.categoryId?.includes(value),
     },
     {
       title: "Image",
@@ -150,13 +150,15 @@ const BlogList = (props: Props) => {
       stt: index,
       title: item.name,
       price: item.price,
-      categoryId: item.name,
+      categoryId: item.categoryId?.name,
       image: item.image,
       desc: item.desc,
       action: item,
       id: item._id,
     };
   });
+  console.log(data);
+
   const AddQuantity = () => {
     const [form] = Form.useForm();
     const { prdAmounts } = useSelector((state: any) => state.prdAmount);
@@ -195,7 +197,7 @@ const BlogList = (props: Props) => {
                 amount: values.amount + item.amount,
               };
               console.log(item);
-              
+
               dispatch(updateprdAmount(data));
 
               onReset();

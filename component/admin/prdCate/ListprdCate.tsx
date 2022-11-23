@@ -1,22 +1,31 @@
-import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import type { TableProps } from 'antd';
+import { Button, Space, Table } from 'antd';
+import type { ColumnsType, FilterValue, SorterResult } from 'antd/es/table/interface';
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { deleteprdCate, getprdCates } from "../../../redux/prdCateSlice";
 import { RootState } from "../../../redux/store";
-import { deleteUser, getUsers } from "../../../redux/userSlice";
-import { formatDate } from "../../../untils";
+import { Tblog } from "../../../models/blogs";
+import { deleteprdCate, getprdCates } from "../../../redux/prdCateSlice";
 
 type Props = {};
+interface DataType {
+    key: string;
+    name: string;
+    age: number;
+    address: string;
+    tags: string[];
+}
 
 const PrdCateList = (props: Props) => {
-    const prdCates = useSelector((state: RootState) => state.prdCate.prdCates);
+    const prdCate = useSelector((state: RootState) => state.prdCate.prdCates);
     const dispatch = useDispatch<any>();
 
     useEffect(() => {
         dispatch(getprdCates());
     }, [dispatch]);
+    console.log(prdCate);      
 
     const handleRemove = (id: any) => {
         Swal.fire({
@@ -34,83 +43,59 @@ const PrdCateList = (props: Props) => {
             }
         });
     };
+    const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+      };
+    const columns: ColumnsType<Tblog> = [
+        {
+            title: 'STT',
+            dataIndex: 'stt',
+            key: 'stt',
+            render: text => <a>{text}</a>,
+        },
+        {
+            title: 'TÊN',
+            dataIndex: 'title',
+            key: 'title',
+            render: text => <a>{text}</a>,
+        },             
+        {
+            title: 'ẢNH',
+            dataIndex: 'image',
+            key: 'image',
+            render: img => <img src={img} width='120' alt="" />,
+        },
+       
+        {
+            title: 'HÀNH ĐỘNG',
+            key: 'action',
+            render: item => (
 
+                <><Link href={`/admin/prdCates/${item.action._id}/edit`}>
+                    <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Sửa
+                    </span>
+                </Link>
+                <button
+                        onClick={() => handleRemove(item.action._id)}
+                        className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
+                    >
+                        Xóa
+                    </button></>
+            ),
+        },
+    ];
+
+    const data: any = prdCate?.map((item, index) => {
+        return {
+            stt: index,
+            title: item.name,
+            image: item.image,
+            action: item
+        }
+    })
     return (
-        <table
-            className="min-w-full divide-y divide-gray-200"
-            id="cate__list-table"
-        >
-            <thead className="bg-gray-50">
-                <tr>
-                    <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                        {" "}
-                        STT{" "}
-                    </th>
-                    <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                        {" "}
-                        Tên danh mục{" "}
-                    </th>
-                    <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                        {" "}
-                        Ảnh{" "}
-                    </th>
-                    
-                    <th
-                        scope="col"
-                        className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                        {" "}
-                        Actions{" "}
-                    </th>
-                </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-                {prdCates?.map((item, index) => (
-                    <tr key={index}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {++index}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {item.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                    <div className="w-40 h-40 relative object-cover ">
-                                        {item.image && (
-                                            <img src={item.image} width="120px" alt="" />
-                                        )}
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </td>                       
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <Link href={`/admin/prdCates/${item._id}/edit`}>
-                                <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Edit
-                                </span>
-                            </Link>
-                            <button
-                                onClick={() => handleRemove(item._id)}
-                                className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <Table columns={columns} dataSource={data} />
     );
 };
 
