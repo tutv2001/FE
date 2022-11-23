@@ -6,6 +6,9 @@ import {
   faSlidersH,
   faHospitalAlt,
   faThList,
+  faDroplet,
+  faScaleUnbalancedFlip,
+  faRuler
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,7 +51,7 @@ const AdminMenu = (props: Props) => {
           </span>
         </Link>
 
-        <Link href="/admin/product">
+        <Link href="/admin/hotels">
           <span className="flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
             <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
               <FontAwesomeIcon icon={faHospitalAlt} />
@@ -84,19 +87,6 @@ const AdminMenu = (props: Props) => {
             </div>
           </span>
         </Link>
-
-        <Link href="/admin/prdCates">
-          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
-            <div className="flex items-center">
-              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
-                <FontAwesomeIcon icon={faThList} />
-              </div>
-              <span>
-                <b>Quản Lý Danh Mục Sản phẩm</b>
-              </span>
-            </div>
-          </span>
-        </Link>
         <Link href="/admin/blogCates">
           <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
             <div className="flex items-center">
@@ -109,19 +99,54 @@ const AdminMenu = (props: Props) => {
             </div>
           </span>
         </Link>
-        <Link href="/admin/vouches">
+        <Link href="/admin/prdCates">
           <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
             <div className="flex items-center">
               <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
                 <FontAwesomeIcon icon={faThList} />
               </div>
               <span>
-                <b>Quản Lý Giảm Giá</b>
+                <b>Quản Lý Danh Mục Sản Phẩm</b>
               </span>
             </div>
           </span>
         </Link>
-
+        <Link href="/admin/prdSizes">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faRuler} />
+              </div>
+              <span>
+                <b>Quản Lý Kích Cỡ</b>
+              </span>
+            </div>
+          </span>
+        </Link>
+        <Link href="/admin/prdColors">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faDroplet} />
+              </div>
+              <span>
+                <b>Quản Lý Màu Sắc</b>
+              </span>
+            </div>
+          </span>
+        </Link>
+        <Link href="/admin/vouches">
+          <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+            <div className="flex items-center">
+              <div className="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                <FontAwesomeIcon icon={faScaleUnbalancedFlip} />
+              </div>
+              <span>
+                <b>Quản Lý Mã Giảm Giá</b>
+              </span>
+            </div>
+          </span>
+        </Link>
         <Link href="/admin/contact">
           <span className="flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
             <div className="flex items-center">
