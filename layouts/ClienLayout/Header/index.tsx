@@ -23,24 +23,24 @@ const header = (props: Props) => {
           {/* Nav Links */}
           <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
             <li>
-              <Link className="hover:text-gray-200" href="">
+              <Link className="hover:text-gray-200" href="/">
                 Trang Chủ
               </Link>
             </li>
             <li>
-              <a className="hover:text-gray-200" href="#">
+              <Link className="hover:text-gray-200" href="/product">
                 Sản Phẩm
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="hover:text-gray-200" href="#">
+              <Link className="hover:text-gray-200" href="/contact">
                 Liên Hệ
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="hover:text-gray-200" href="#">
-                Tin Tức{" "}
-              </a>
+              <Link className="hover:text-gray-200" href="/blogs">
+                Tin Tức
+              </Link>
             </li>
             <li>
               <a className="hover:text-gray-200" href="#">
