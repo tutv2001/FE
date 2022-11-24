@@ -1,10 +1,12 @@
 import { TableProps } from 'antd';
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import React, { ReactElement, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { ClientLayout } from '../../layouts'
 import { Tprd } from '../../models/prd';
 import { TprdCate } from '../../models/prdCate';
+import { getprdCates } from '../../redux/prdCateSlice';
 import { getProducts } from '../../redux/prdSlice';
 import { RootState } from '../../redux/store';
 import styles from './cate.module.css'
@@ -23,15 +25,19 @@ interface DataType {
 }
 
 
-const Category = (props: Props) => {
+const Product = (props: Props) => {
   const products = useSelector((state: RootState) => state.prd.products);
   const dispatch = useDispatch<any>();
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getprdCates())
   }, [dispatch]);
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
+  const {prdCates} = useSelector((state:RootState)=>state.prdCate)
+  console.log("cate",prdCates);
+  
   return (
     <>
       <nav className="relative w-[1410px] mx-auto flex flex-wrap items-center justify-between py-8 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 navbar navbar-expand-lg navbar-light">
@@ -82,404 +88,24 @@ const Category = (props: Props) => {
                     Danh mục
                   </h3>
                   <div className="mt-2 flex flex-col space-y-4">
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
+                    
+                    {
+                        prdCates?.map((item:any)=>(
+                          <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
+                        <label className="group flex items-center text-heading text-sm cursor-pointer">
                       <input
                         type="checkbox"
                         className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
                         name="woman"
                         defaultValue="woman"
                       />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Woman
+
+                      {item.name}
+                    </label>
+
                       </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="man"
-                        defaultValue="man"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">Man</span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="watch"
-                        defaultValue="watch"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Watch
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="kids"
-                        defaultValue="kids"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">Kids</span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="sports"
-                        defaultValue="sports"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Sports
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="sunglass"
-                        defaultValue="sunglass"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Sunglass
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="bags"
-                        defaultValue="bags"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">Bags</span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="sneakers"
-                        defaultValue="sneakers"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Sneakers
-                      </span>
-                    </label>
-                  </div>
-                </div>
-                {/* <div className="block border-b border-gray-300 pb-7 mb-7">
-                  <h3 className="text-heading text-sm md:text-base font-semibold mb-7">
-                    Thương hiệu
-                  </h3>
-                  <div className="mt-2 flex flex-col space-y-4">
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="shovia"
-                        defaultValue="shovia"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Shovia
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="fusion"
-                        defaultValue="fusion"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Fusion
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="hunter shoes"
-                        defaultValue="hunter-shoes"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Hunter Shoes
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="club shoes"
-                        defaultValue="club-shoes"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Club Shoes
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="hoppister"
-                        defaultValue="hoppister"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Hoppister
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="blaze fashion"
-                        defaultValue="blaze-fashion"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Blaze Fashion
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="elegance"
-                        defaultValue="elegance"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Elegance
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="fashadil"
-                        defaultValue="fashadil"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Fashadil
-                      </span>
-                    </label>
-                  </div>
-                </div> */}
-                {/* <div className="block border-b border-gray-300 pb-7 mb-7">
-                  <h3 className="text-heading text-sm md:text-base font-semibold mb-7">
-                    Giá
-                  </h3>
-                  <div className="mt-2 flex flex-col space-y-4">
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="under $50"
-                        defaultValue="0-50"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Under $50
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="$50 to $100"
-                        defaultValue="50-100"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        $50 to $100
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="$100 to $150"
-                        defaultValue="100-150"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        $100 to $150
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="$150 to $200"
-                        defaultValue="150-200"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        $150 to $200
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="$200 to $300"
-                        defaultValue="200-300"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        $200 to $300
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="$300 to $500"
-                        defaultValue="300-500"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        $300 to $500
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="$500 to $1000"
-                        defaultValue="500-1000"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        $500 to $1000
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="over $1000"
-                        defaultValue="1000-"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        Over $1000
-                      </span>
-                    </label>
-                  </div>
-                </div> */}
-                <div className="block pb-7">
-                  <h3 className="text-heading text-sm md:text-base font-semibold mb-7">
-                    Màu sắc
-                  </h3>
-                  <div className="mt-2 flex flex-col space-y-4">
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="black"
-                        defaultValue="black"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(0, 0, 0)" }}
-                          />
-                          Đen
-                        </span>
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="blue"
-                        defaultValue="blue"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(51, 16, 206)" }}
-                          />
-                          Xanh dương
-                        </span>
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="olive"
-                        defaultValue="olive"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(12, 116, 72)" }}
-                          />
-                          Xanh lục
-                        </span>
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="maroon"
-                        defaultValue="maroon"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(95, 14, 14)" }}
-                          />
-                          Nâu hạt dẻ
-                        </span>
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="brown"
-                        defaultValue="brown"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(54, 39, 39)" }}
-                          />
-                          Nâu thường
-                        </span>
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="white"
-                        defaultValue="white"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(255, 255, 255)" }}
-                          />
-                          Trắng
-                        </span>
-                      </span>
-                    </label>
-                    <label className="group flex items-center text-heading text-sm cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none checked:bg-heading checked:hover:bg-heading checked:focus:bg-heading"
-                        name="gray"
-                        defaultValue="gray"
-                      />
-                      <span className="ms-4 -mt-0.5 ml-[15px] text-normal">
-                        <span className="flex items-center">
-                          <span
-                            className="w-5 h-5 rounded-full block me-3 mt-0.5 border border-black border-opacity-20 mr-[5px]"
-                            style={{ backgroundColor: "rgb(225, 225, 225)" }}
-                          />
-                          Xám
-                        </span>
-                      </span>
-                    </label>
+                        ))
+                      }
                   </div>
                 </div>
               </div>
@@ -490,7 +116,7 @@ const Category = (props: Props) => {
             {products?.map((item, index) => (
               <div className="w-full pb-8" key={index}>
                 <div className="p-0 bg-light group text-center">
-                  <a className="block mb-2" href="#">
+                  <div className="block mb-2">
                     <div className="relative overflow-hidden">
                       <div className="mb-5 overflow-hidden">
                         <picture>
@@ -533,16 +159,18 @@ const Category = (props: Props) => {
                         </div>
                       </div>
                     </div>
+                    <Link href="">
                     <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
                       {item.name}
                     </h3>
+                    </Link>
                     <p className="text-lg font-semibold text-[#A71010] ">
                       {/* <span className="text-lg mr-[8px] font-semibold text-gray-400 line-through ">
                       $33.69
                     </span> */}
                       <span>${item.price}</span>
                     </p>
-                  </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -600,5 +228,5 @@ const Category = (props: Props) => {
 //     revalidate: 60,
 //   };
 // };
-Category.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
-export default Category
+Product.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
+export default Product

@@ -1,8 +1,21 @@
-import React from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../redux/prdSlice';
+import { RootState } from '../../redux/store';
 
 type Props = {}
 
 const ProductDetail = (props: Props) => {
+  const router = useRouter()
+  const {id} = router.query
+  const products = useSelector((state: RootState) => state.prd.products);
+  const dispatch = useDispatch<any>();
+  const data = products.find((item:any)=>item._id === id)
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+  if(!data) return <div>loading...</div>
   return (
     <div>
       <section className="text-gray-700 body-font overflow-hidden bg-white">
@@ -10,8 +23,8 @@ const ProductDetail = (props: Props) => {
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg" />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-              <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
-              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">The Catcher in the Rye</h1>
+              {/* <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> */}
+              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{data.name}</h1>
               <p className="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                 <div className="flex">

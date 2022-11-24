@@ -1,8 +1,8 @@
-import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Tuser } from "../../../models/user";
 import { RootState } from "../../../redux/store";
+import Link from "next/link";
 import styles from './header.module.css'
 
 
@@ -128,8 +128,6 @@ const header = (props: Props) => {
       </nav>
     </section>
   </header>
-
-
 };
 
 export default header;
