@@ -20,7 +20,7 @@ const Andex: NextPageWithLayout = (props: Props) => {
   const loadStatisticDashboard = useCallback(() => {
     setLoading(true)
     StatisticApi.dashboard().then((res: any) => {
-      setStatisticDashboard(res.totalProduct)
+      setStatisticDashboard(res)
       setLoading(false)
     })
   }, [])
@@ -36,7 +36,7 @@ const Andex: NextPageWithLayout = (props: Props) => {
             <DataDisplayWidget
               icon={<UserOutlined />}
               value={statisticDashboard.totalProduct}
-              title="Total products"
+              title="Tổng sản phẩm"
               color="cyan"
               avatarSize={55}
               loading={loading}

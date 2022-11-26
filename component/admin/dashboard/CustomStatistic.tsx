@@ -1,34 +1,36 @@
 import { animated, useSpring } from "react-spring";
+import numeral from 'numeral';
 
 const Value = (props: any) => {
   const data = useSpring({ total: props.loading ? 0 : props.value });
   let value;
+  const numberFormat = (value: number) => numeral(value).format('0,0')
   switch (props.size) {
     case "lg":
       value = (
         <animated.h2 className="mb-0 font-weight-bold">
-          {data.total.to((x: number) => x.toFixed(0))}
+          {data.total.to((x: number) => numberFormat(x))}
         </animated.h2>
       );
       break;
     case "md":
       value = (
         <animated.h2 className="mb-0 font-weight-bold">
-          {data.total.to((x: number) => x.toFixed(0))}
+          {data.total.to((x: number) => numberFormat(x))}
         </animated.h2>
       );
       break;
     case "sm":
       value = (
         <animated.h2 className="mb-0 font-weight-bold">
-          {data.total.to((x: number) => x.toFixed(0))}
+          {data.total.to((x: number) => numberFormat(x))}
         </animated.h2>
       );
       break;
     default:
       value = (
         <animated.h2 className="mb-0 font-weight-bold">
-          {data.total.to((x: number) => x.toFixed(0))}
+          {data.total.to((x: number) => numberFormat(x))}
         </animated.h2>
       );
   }
