@@ -3,10 +3,16 @@ import Hero from '../component/Hero'
 import { ClientLayout } from '../layouts'
 import Link from "next/link";
 import styles from './home.module.css'
+import { Tblog } from '../models/blogs';
+import { GetStaticProps } from 'next';
+import { TprdCate } from '../models/prdCate';
 
-type Props = {}
+type Props = {
+  posts:Tblog[];
+  cateProduct:TprdCate[];
+}
 
-const Home = (props: Props) => {
+const Home = ({posts, cateProduct}: Props) => {
   return (
     <>
       <div
@@ -46,19 +52,7 @@ const Home = (props: Props) => {
               <p>Some representative placeholder content for the first slide.</p>
             </div>
           </div>
-          {/* 
-    <div class="carousel-item relative float-left w-full">
-<img
-  src="img/hero/hero-2.jpg"
-  class="block w-full"
-  alt="..."
-/>
-<div class="carousel-caption hidden md:block absolute text-center">
-  <h5 class="text-xl">Third slide label</h5>
-  <p>Some representative placeholder content for the third slide.</p>
-</div>
-    </div>
-  </div> */}
+  
           <button
             className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
             type="button"
@@ -378,8 +372,8 @@ const Home = (props: Props) => {
         className="categories container-full py-5 bg-rose-50"
         data-aos="zoom-in-up"
       >
-        <div className="w-[1410px] mx-auto flex flex-wrap  flex justify-center">
-          <div className="cate_item lg:w-1/5 pr-4 pl-4 md:w-2/5 pr-4 pl-4">
+        <div className="w-[1410px] mx-auto  flex-wrap  flex justify-center">
+          <div className="cate_item lg:w-1/5 md:w-2/5 pr-4 pl-4">
             <a href="#">
              <picture>
               <img
@@ -392,7 +386,7 @@ const Home = (props: Props) => {
               <a href="#">Quần nam</a>
             </h5>
           </div>
-          <div className="cate_item lg:w-1/5 pr-4 pl-4 md:w-2/5 pr-4 pl-4">
+          <div className="cate_item lg:w-1/5  md:w-2/5 pr-4 pl-4">
             <a href="#">
               <picture>
               <img
@@ -405,7 +399,7 @@ const Home = (props: Props) => {
               <a href="#">Áo nam</a>
             </h2>
           </div>
-          <div className="cate_item lg:w-1/5 pr-4 pl-4 md:w-2/5 pr-4 pl-4">
+          <div className="cate_item lg:w-1/5  md:w-2/5 pr-4 pl-4">
             <a href="#">
              <picture>
              <img
@@ -418,7 +412,7 @@ const Home = (props: Props) => {
               <a href="#">Áo nữ</a>
             </h2>
           </div>
-          <div className="cate_item lg:w-1/5 pr-4 pl-4 md:w-2/5 pr-4 pl-4">
+          <div className="cate_item lg:w-1/5  md:w-2/5 pr-4 pl-4">
             <a href="#">
               <picture>
               <img
@@ -431,7 +425,7 @@ const Home = (props: Props) => {
               <a href="#">Quần nữ</a>
             </h2>
           </div>
-          <div className="cate_item lg:w-1/5 pr-4 pl-4 md:w-1/2 pr-4 pl-4">
+          <div className="cate_item lg:w-1/5  md:w-1/2 pr-4 pl-4">
             <a href="#">
              <picture>
              <img
@@ -1107,66 +1101,29 @@ const Home = (props: Props) => {
             </h1>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-            <div>
-              <picture>
-              <img
-                className="object-cover object-center w-full h-64 lg:h-80"
-                src="img/blog/blog-3.jpg"
-                alt=""
-              />
-              </picture>
-              <div className="mt-8 text-center">
-                <span className="text-xs uppercase tracking-widest">Thời Trang</span>
-                <h1 className="mt-4 text-2xl font-normal text-gray-800 capitalize dark:text-white">
-                  Cách Chi Tiêu Hợp Lý
-                </h1>
-                <div className="text-center mt-4">
-                  <a href="#" className="inline-block text-black underline ">
-                    Đọc Tiếp
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div>
+           {posts.map((item, index)=>(
+             <div key={index}>
              <picture>
              <img
-                className="object-cover object-center w-full h-64  lg:h-80"
-                src="img/blog/blog-2.jpg"
-                alt=""
-              />
+               className="object-cover object-center w-full h-64 lg:h-80"
+               src={item.thumbnail}
+               alt=""
+             />
              </picture>
-              <div className="mt-8 text-center">
-                <span className="text-xs uppercase tracking-widest">Thời Trang</span>
-                <h1 className="mt-4 text-2xl font-normal text-gray-800 capitalize dark:text-white">
-                  Đồ Len Cho Mùa Đông
-                </h1>
-                <div className="text-center mt-4">
-                  <a href="#" className="inline-block text-black underline ">
-                    Đọc Tiếp
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div>
-             <picture>
-             <img
-                className="object-cover object-center w-full h-64 lg:h-80"
-                src="img/blog/blog-1.jpg"
-                alt=""
-              />
-             </picture>
-              <div className="mt-8 text-center">
-                <span className="text-xs uppercase tracking-widest">Thời Trang</span>
-                <h1 className="mt-4 text-2xl font-normal text-gray-800 capitalize dark:text-white">
-                  Cách Phối Đồ Đẹp
-                </h1>
-                <div className="text-center mt-4">
-                  <a href="#" className="inline-block text-black underline ">
-                    Đọc Tiếp
-                  </a>
-                </div>
-              </div>
-            </div>
+             <div className="mt-8 text-center">
+               <span className="text-xs uppercase tracking-widest">{item.categoryId.name}</span>
+               <h1 className="mt-4 text-2xl font-normal text-gray-800 capitalize dark:text-white">
+                {item.title}
+               </h1>
+               <div className="text-center mt-4">
+                 <a href="#" className="inline-block text-black underline ">
+                   Đọc Tiếp
+                 </a>
+               </div>
+             </div>
+           </div>
+           ))}
+          
           </div>
         </div>
       </section>
@@ -1176,5 +1133,24 @@ const Home = (props: Props) => {
 
   )
 }
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch("https://duan01cuongnd.herokuapp.com/api/news");
+  const posts = await res.json();
+
+  const req = await fetch("https://duan01cuongnd.herokuapp.com/api/categoryNews");
+  const catePost = await req.json();
+  
+  const reCate= await fetch("http://localhost:8000/api/Cateproduct");
+  const cateProduct= await reCate.json();
+
+  return {
+    props: {
+      posts,
+      catePost,
+      cateProduct,
+    },
+    revalidate: 60,
+  };
+};
 Home.getLayout = (page: ReactElement) => <ClientLayout>{page}</ClientLayout>
 export default Home
