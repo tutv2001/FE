@@ -87,14 +87,14 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
   return (
     <>
       <Head>
-        <title>Add User</title>
+        <title>Thêm Sản Phẩm</title>
       </Head>
       <header className="z-10 fixed top-0 left-0 md:left-60 right-0 px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
         <div className="flex items-center text-sm text-gray-600">
-          <h5 className="relative pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
-            Products
+          <h5 className="relative mb-0 pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
+            Sản Phẩm
           </h5>
-          <span>Add Products</span>
+          <span>Thêm Sản Phẩm</span>
         </div>
         <Link href="/admin/product">
           <button
@@ -209,7 +209,7 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
                           htmlFor="form__add-user-avatar"
                           className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
-                          <span>Upload a file</span>
+                          <span>Tải lên File</span>
                           <input
                             id="form__add-user-avatar"
                             {...register("image", {
@@ -222,7 +222,7 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
                             className="sr-only"
                           />
                         </label>
-                        <p className="pl-1">or drag and drop</p>
+                        <p className="pl-1">Hoặc kéo thả</p>
                       </div>
                       <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                     </div>

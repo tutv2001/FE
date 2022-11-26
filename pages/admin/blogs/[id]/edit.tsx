@@ -95,14 +95,14 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
     return (
         <>
             <Head>
-                <title>Add User</title>
+                <title>Sửa Tin Tức</title>
             </Head>
             <header className="z-10 fixed top-0 left-0 md:left-60 right-0 px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
                 <div className="flex items-center text-sm text-gray-600">
-                    <h5 className="relative pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
-                        Blogs
+                    <h5 className="relative mb-0 pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
+                        Tin Tức
                     </h5>
-                    <span>Add Blog</span>
+                    <span>Sửa Tin tức</span>
                 </div>
                 <Link href="/admin/blogs">
                     <button
@@ -127,7 +127,7 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
                                         htmlFor="form__add-user-fullname"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Title
+                                            Tiêu Đề
                                     </label>
                                     <input
                                         type="text"
@@ -145,7 +145,7 @@ const AddBlog: NextPageWithLayout = (props: Props) => {
                                         htmlFor="form__add-user-fullname"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Desc
+                                        Mô tả 
                                     </label>
                                     <input
                                         type="text"

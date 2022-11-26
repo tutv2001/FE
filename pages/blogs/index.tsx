@@ -48,13 +48,7 @@ const index = ({ posts, catePost }: Props) => {
        <a href="#" className="text-3xl font-bold hover:text-gray-700 pb-4">
        {item.title}
        </a>
-       <p  className="text-sm pb-3">
-         By{" "}
-         <a href="#" className="font-semibold hover:text-gray-800">
-           David Grzyb
-         </a>
-         , Published on April 25th, 2020
-       </p>
+       
        {/* <a href="#" className="pb-6 w-96">
          {item.content}
        </a> */}

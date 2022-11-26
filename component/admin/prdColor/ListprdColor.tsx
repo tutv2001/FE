@@ -54,7 +54,7 @@ const PrdColorList = (props: Props) => {
             render: text => <a>{text}</a>,
         },
         {
-            title: 'MÀU',
+            title: 'Màu Sắc',
             dataIndex: 'title',
             key: 'title',
             render: text => <a>{text}</a>,
@@ -67,7 +67,7 @@ const PrdColorList = (props: Props) => {
         // },
        
         {
-            title: 'HÀNH ĐỘNG',
+            title: 'Hành Động',
             key: 'action',
             render: item => (
 
