@@ -67,7 +67,7 @@ const Product = (props: Props) => {
       <div className="w-[1410px] mx-auto pt-[50px]">
         <div className="flex flex-no-wrap">
           <div className="lg:w-1/4 pr-4 pl-4">
-            <div className="flex hidden lg:block">
+            <div className="flex-hidden lg:block">
               <div className="pt-1">
                 <div className="block border-b border-gray-300 pb-7 mb-7">
                   <div className="flex items-center justify-between mb-2.5">
