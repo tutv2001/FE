@@ -55,31 +55,31 @@ const PrdSizeList = (props: Props) => {
             render: text => <a>{text}</a>,
         },
         {
-            title: 'MÃ',
+            title: 'Mã',
             dataIndex: 'title',
             key: 'title',
             render: text => <a>{text}</a>,
         },             
         {
-            title: 'NGÀY HẾT HẠN',
+            title: 'Ngày hết hạn' ,
             dataIndex: 'time',
             key: 'time',
             render: text => <a>{text}</a>,
         },
         {
-          title: 'SỐ LƯỢNG',
+          title: 'Số Lượng',
           dataIndex: 'amount',
           key: 'amount',
           render: text => <a>{text}</a>,
       },
       {
-        title: 'GIẢM GIÁ(%)',
+        title: 'Giamr giá(%)',
         dataIndex: 'percent',
         key: 'percent',
         render: text => <a>{text}</a>,
     },
         {
-            title: 'HÀNH ĐỘNG',
+            title: 'Hành Động',
             key: 'action',
             render: item => (
 

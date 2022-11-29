@@ -66,18 +66,18 @@ const BlogList = (props: Props) => {
             render: text => <a>{text}</a>,
         },
         {
-            title: 'Title',
+            title: 'Tiêu đề',
             dataIndex: 'title',
             key: 'title',
             render: text => <a>{text}</a>,
         },
         {
-            title: 'Content',
+            title: 'Nội dung',
             dataIndex: 'content',
             key: 'content',
         },
         {
-            title: 'Category',
+            title: 'Danh mục',
             dataIndex: 'category',
             key: 'category',
             filters: 
@@ -86,20 +86,20 @@ const BlogList = (props: Props) => {
             onFilter: (value:any, record: any): any => record.category.includes(value),
         },
         {
-            title: 'Image',
+            title: 'Ảnh',
             dataIndex: 'image',
             key: 'image',
             render: img => <img src={img} width='120' alt="" />,
         },
        
         {
-            title: 'Action',
+            title: 'Hành động',
             key: 'action',
             render: item => (
 
                 <><Link href={`/admin/blogs/${item.action._id}/edit`}>
                     <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Edit
+                        Chỉnh sửa 
                     </span>
                 </Link><Link href={`/admin/blogs/${item.action._id}/info`}>
                         <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -109,7 +109,7 @@ const BlogList = (props: Props) => {
                         onClick={() => handleRemove(item.action._id)}
                         className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
                     >
-                        Delete
+                        Xoá
                     </button></>
             ),
         },

@@ -51,21 +51,21 @@ const AddUser: NextPageWithLayout = (props: Props) => {
   return (
     <>
       <Head>
-        <title>Add User</title>
+        <title>Thêm Người Dùng</title>
       </Head>
       <header className="z-10 fixed top-0 left-0 md:left-60 right-0 px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
         <div className="flex items-center text-sm text-gray-600">
-          <h5 className="relative pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
-            Users
+          <h5 className="relative mb-0 pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
+            Người Dùng
           </h5>
-          <span>Add User</span>
+          <span>Thêm Người Dùng</span>
         </div>
         <Link href="/admin/user">
           <button
             type="button"
             className="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            DS User
+            DS Người Dùng
           </button>
         </Link>
       </header>
