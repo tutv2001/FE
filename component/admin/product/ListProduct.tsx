@@ -174,7 +174,7 @@ const BlogList = (props: Props) => {
       values.prd_id = id;
 
       let flag = false;
-      dataNews.map((item: any) => {
+      dataNews.map((item: any) => {    
         if (values.prd_id == item.prd_id._id && values.size_id == item.size_id._id && values.color == item.color._id) {
           flag = true;
           Swal.fire({
