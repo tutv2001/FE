@@ -23,3 +23,13 @@ export const update = (user: Tuser): Promise<Tuser> => {
 export const changePass = (user: any): Promise<any> => {
     return axiosClient.put(`/users/changepassword/${user._id}`, user);
 };
+// 
+export const getProfile = (token:any) => {
+    const url = `/user/my-profile`;
+    const header = {
+      headers: {
+        Authorization: `${token}`,
+      },
+    };
+    return axiosClient.get(url, header);
+  };

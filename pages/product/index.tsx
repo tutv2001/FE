@@ -159,7 +159,7 @@ const Product = (props: Props) => {
                         </div>
                       </div>
                     </div>
-                    <Link href="">
+                    <Link href={`/product/${item._id}`}>
                     <h3 className="mb-2 text-xl font-normal text-[#999999] uppercase">
                       {item.name}
                     </h3>

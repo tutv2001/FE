@@ -110,7 +110,7 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
         <form action="" method="POST" onSubmit={handleSubmit(onSubmit)}>
           <div className="shadow overflow-hidden sm:rounded-md">
             <div className="px-4 py-5 bg-white sm:p-6">
-              <span className="font-semibold mb-4 block text-xl">Thêm bài sản phẩm mới</span>
+              <span className="font-semibold mb-4 block text-xl">Thêm sản phẩm mới</span>
               <div className="grid grid-cols-6 gap-3">
                 <div className="col-span-6">
                   <label htmlFor="form__add-user-fullname" className="block text-sm font-medium text-gray-700">
@@ -157,7 +157,7 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
                     Danh mục sản phẩm
                   </label>
                   <select {...register("categoryId", { required: true })}>
-                    <option className="py-1">Categorys</option>
+                    <option className="py-1">Danh mục</option>
                     {prdCate.map((item: any, index: any) => {
                       return (
                         <option key={index} className="py-1" value={item._id}>
@@ -187,7 +187,7 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
                   </div>
                 </div>
                 <div className="col-span-6">
-                  <label className="block text-sm font-medium text-gray-700">Ảnh bài viết</label>
+                  <label className="block text-sm font-medium text-gray-700">Ảnh sản phẩm</label>
                   <div className="w-full mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                     <div className="space-y-1 text-center">
                       <svg
@@ -237,7 +237,7 @@ const AddPrd: NextPageWithLayout = (props: Props) => {
                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 {" "}
-                Thêm bài viết{" "}
+                Thêm sản phẩm{" "}
               </button>
             </div>
           </div>
