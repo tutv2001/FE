@@ -1,8 +1,10 @@
+import Link from "next/link";
 import React, { ReactElement } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import { addUser } from "../../Api/authApi";
 import { Tuser } from "../../models/user";
+import userToggle from "../../hook/userToggle";
 type Props = {};
 
 const Register = (props: Props) => {
@@ -14,11 +16,12 @@ const Register = (props: Props) => {
   const onSubmit: SubmitHandler<Tuser> = async (value: Tuser) => {
     try {
       await addUser(value);
-      toast.success("okok");
+      toast.success("Thành công");
     } catch (error) {
-      toast.error("lỗi");
+      toast.error("Lỗi");
     }
   };
+  const [PasswordInputType, ToggleIcon] = userToggle();
   return (
     <div className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -52,17 +55,18 @@ const Register = (props: Props) => {
                   <span className="text-red-700">is required</span>
                 )}
               </div>
-              <div>
+              <div className="relative">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Mật khẩu
                 </label>
                 <input
-                  type="password"
+                  type={PasswordInputType}
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("password", { required: true })}
                 />
+                <span className="absolute cursor-pointer bottom-[8px] right-[16px]">{ToggleIcon}</span>
                 {errors.name?.type === "required" && (
                   <span className="text-red-700">is required</span>
                 )}
@@ -114,12 +118,12 @@ const Register = (props: Props) => {
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Bạn đã có tài khoản ?{" "}
-                <a
-                  href="#"
+                <Link
+                  href="login"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Đăng nhập tại đây
-                </a>
+                </Link>
               </p>
             </form>
           </div>
