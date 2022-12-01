@@ -36,7 +36,7 @@ const PrdSizeList = (props: Props) => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Vâng chắc chắn rồi!",
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await dispatch(deleteprdSize(id)).unwrap();
@@ -73,7 +73,7 @@ const PrdSizeList = (props: Props) => {
           render: text => <a>{text}</a>,
       },
       {
-        title: 'Giamr giá(%)',
+        title: 'Giảm giá(%)',
         dataIndex: 'percent',
         key: 'percent',
         render: text => <a>{text}</a>,
@@ -84,13 +84,13 @@ const PrdSizeList = (props: Props) => {
             render: item => (
 
                 <><Link href={`/admin/vouches/${item.action._id}/edit`}>
-                    <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Sửa
-                    </span>
+                    <a className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:text-white bg-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Sửa
+                </a>
                 </Link>                             
                 <button
                     onClick={() => handleRemove(item.action._id)}
-                    className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
+                    className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
                 >
                     Xóa
                 </button></>

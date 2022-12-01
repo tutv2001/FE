@@ -6,15 +6,23 @@ import styles from './home.module.css'
 import { Tblog } from '../models/blogs';
 import { GetStaticProps } from 'next';
 import { TprdCate } from '../models/prdCate';
+import Head from 'next/head';
+import { Tprd } from '../models/prd';
 
 type Props = {
   posts:Tblog[];
   cateProduct:TprdCate[];
+  product:Tprd[];
 }
 
-const Home = ({posts, cateProduct}: Props) => {
+const Home = ({posts, cateProduct, product}: Props) => {
   return (
     <>
+    <Head>
+      <title>
+        Trang chủ
+      </title>
+    </Head>
       <div
         id="carouselExampleCaptions"
         className="carousel slide relative"
@@ -919,7 +927,7 @@ const Home = ({posts, cateProduct}: Props) => {
                   />
                   <button
                     type="submit"
-                    className="inline-block px-7 py-3 bg-black text-white font-normal text-sm leading-snug uppercase hover:bg-blue-700 hover:bg-white hover:text-black "
+                    className="inline-block px-7 py-3 bg-black text-white font-normal text-sm leading-snug uppercase hover:bg-black hover:text-black "
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
                   >
@@ -1143,11 +1151,16 @@ export const getStaticProps: GetStaticProps = async () => {
   const reCate= await fetch("http://localhost:8000/api/Cateproduct");
   const cateProduct= await reCate.json();
 
+  const pro = await fetch("http://localhost:8000/api/product");
+  const products = await pro.json();
+
   return {
     props: {
       posts,
       catePost,
       cateProduct,
+      products,
+
     },
     revalidate: 60,
   };

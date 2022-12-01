@@ -23,33 +23,33 @@ const header = (props: Props) => {
           {/* Nav Links */}
           <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
             <li>
-              <Link className="hover:text-gray-200" href="/">
-                Trang Chủ
+              <Link className="  hover:text-gray-200" href="/">
+                <a href="" className="text-white">Trang Chủ</a>
               </Link>
             </li>
             <li>
               <Link className="hover:text-gray-200" href="/product">
-                Sản Phẩm
+              <a href="" className="text-white">Sản Phẩm</a>
               </Link>
             </li>
             <li>
               <Link className="hover:text-gray-200" href="/contact">
-                Liên Hệ
+              <a href="" className="text-white">Liên Hệ</a>
               </Link>
             </li>
             <li>
               <Link className="hover:text-gray-200" href="/blogs">
-                Tin Tức
+              <a href="" className="text-white">Tin Tức</a>
               </Link>
             </li>
             <li>
               <a className="hover:text-gray-200" href="#">
-                Giới Thiệu
+              <a href="" className="text-white">Giới Thiệu</a>
               </a>
             </li>
           </ul>
           {/* Header Icons */}
-          <div className="hidden xl:flex items-center space-x-5 items-center">
+          <div className="hidden xl:flex space-x-5 items-center">
             <a className="hover:text-gray-200" href="#">
               <img src="img/icon/search.png" />
             </a>
