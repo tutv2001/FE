@@ -74,7 +74,7 @@ const Home = ({posts, product, cateProduct}: Props) => {
               <p>Some representative placeholder content for the first slide.</p>
             </div>
           </div>
-  
+
           <button
             className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
             type="button"
@@ -709,7 +709,7 @@ const Home = ({posts, product, cateProduct}: Props) => {
              </div>
            </div>
            ))}
-          
+
           </div>
         </div>
       </section>
@@ -723,15 +723,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch("http://localhost:8000/api/news");
   const posts = await res.json();
 
+
   const req = await fetch("http://localhost:8000/api/categorynews");
-  const catePost = await req.json();
+=======
+  const req = await fetch("http://localhost:8000/api/categoryNews");
+
   
-  const reCate= await fetch("http://localhost:8000/api/Cateproduct");
-  const cateProduct= await reCate.json();
-
-  const pro = await fetch("http://localhost:8000/api/product");
-  const products = await pro.json();
-
   return {
     props: {
       posts,
