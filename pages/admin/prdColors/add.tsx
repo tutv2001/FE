@@ -69,7 +69,7 @@ const AddprdSize: NextPageWithLayout = (props: Props) => {
                     <div className="shadow overflow-hidden sm:rounded-md">
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <span className="font-semibold mb-4 block text-xl">
-                                Thông tin chi tiết Color:
+                                Thêm Màu Sắc:
                             </span>
                             <div className="grid grid-cols-6 gap-3">
                                 <div className="col-span-6">

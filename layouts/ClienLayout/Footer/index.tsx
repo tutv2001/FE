@@ -54,7 +54,7 @@ const Footer = (props: Props) => {
       <div className="flex">
         <input
           type="email"
-          placeholder="Your email..."
+          placeholder="Email của bạn..."
           className="border border-[#E5E5E5 ] h-[54px] w-[251px] mr-[4px]"
         />
         <div className="bg-black w-[74px] h-[54px]">

@@ -70,7 +70,7 @@ const BlogList = (props: Props) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Vâng chắc chắn rồi!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         await dispatch(deleteProduct(id)).unwrap();
@@ -128,13 +128,13 @@ const BlogList = (props: Props) => {
       render: (item) => (
         <>
           <Link href={`/admin/product/${item.action._id}/edit`}>
-            <span className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <a className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Sửa
-            </span>
+            </a>
           </Link>
           <button
             onClick={() => handleRemove(item.action._id)}
-            className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
+            className="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
           >
             Xoá
           </button>
