@@ -4,6 +4,7 @@ export interface Tprd {
     image: string
     price?: string |number
     desc?: string
+    slug: string
     categoryId: {
         name: string
     }

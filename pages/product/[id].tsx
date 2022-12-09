@@ -1,12 +1,16 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Comment from '../../component/Comment';
+import { Tprd } from '../../models/prd';
 import { getProducts } from '../../redux/prdSlice';
 import { RootState } from '../../redux/store';
 
-type Props = {}
+type Props = {
+  product: Tprd;
+}
 
-const ProductDetail = (props: Props) => {
+const ProductDetail = (product: Props) => {
   const router = useRouter()
   const {id} = router.query
   const products = useSelector((state: RootState) => state.prd.products);
@@ -63,6 +67,7 @@ const ProductDetail = (props: Props) => {
           </div>
         </div>
       </section>
+      <Comment product={product} />
     </div>
   )
 }
