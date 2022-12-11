@@ -164,7 +164,7 @@ const AdminMenu = (props: Props) => {
         className="py-2 w-full text-white font-bold text-md cursor-pointer fixed bottom-0 border-solid border-t-2 border-b-2 border-sky-500"
         onClick={handleSignout}
       >
-        <FontAwesomeIcon icon={faSignOutAlt} /> Đăng xuất
+        <FontAwesomeIcon icon={faSignOutAlt} /> Đăng Xuất
       </button>
     </nav>
   );
