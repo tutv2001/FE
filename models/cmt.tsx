@@ -6,6 +6,8 @@ export type Tcmt = {
   productId: string;
   content: string;
   createdAt?: Date;
-  user?: Tuser;
+  user?: {
+    name: Tuser
+  };
   slug?: string;
 };
