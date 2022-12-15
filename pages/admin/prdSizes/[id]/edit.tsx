@@ -57,21 +57,21 @@ const EditprdSize: NextPageWithLayout = (props: Props) => {
     return (
         <>
            <Head>
-                <title>Edit Size</title>
+                <title>Sửa Kích Cỡ</title>
             </Head>
             <header className="z-10 fixed top-0 left-0 md:left-60 right-0 px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
                 <div className="flex items-center text-sm text-gray-600">
-                    <h5 className="relative pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
-                    Size
+                    <h5 className="relative mb-0 pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
+                    Kích Cỡ
                     </h5>
-                    <span>Edit Size</span>
+                    <span>Sửa Kích Cỡ</span>
                 </div>
                 <Link href="/admin/prdSizes">
                     <button
                         type="button"
                         className="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        DS Size
+                        DS Kích Cỡ
                     </button>
                 </Link>
             </header>
@@ -81,7 +81,7 @@ const EditprdSize: NextPageWithLayout = (props: Props) => {
                     <div className="shadow overflow-hidden sm:rounded-md">
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <span className="font-semibold mb-4 block text-xl">
-                                Thông tin chi tiết Size:
+                                Sửa Kích Cỡ:
                             </span>
                             <div className="grid grid-cols-6 gap-3">
                                 <div className="col-span-6">
@@ -89,7 +89,7 @@ const EditprdSize: NextPageWithLayout = (props: Props) => {
                                         htmlFor="form__add-user-fullname"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Size
+                                        Kích Cỡ
                                     </label>
                                     <input
                                         type="text"

@@ -17,4 +17,19 @@ export const formatDate = (dateString: any) => {
     const seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
 
     return `${formatDate}/${month}/${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
-}; 
+};
+
+export const thousandFormat = (value: number): string => {
+    return Intl.NumberFormat('vi-VN', { currency: 'VND' }).format(value);
+}
+export const parserThousandFormat = (value: string): number => {
+    return Number(value.replaceAll('.', ''))
+}
+
+export function findStringDuplicates<Type = any>(arr: Array<Type>): Array<Type> {
+    return arr.filter((item, index) => arr.indexOf(item) != index);
+}
+
+export function uniqueStringDuplicates<Type = any>(arr: Array<Type>): Set<Type> {
+    return new Set(findStringDuplicates(arr));
+}

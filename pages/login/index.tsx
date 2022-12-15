@@ -1,11 +1,17 @@
 import { useRouter } from "next/router";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { loginnn } from "../../Api/authApi";
 import { Tuser } from "../../models/user";
 import { login } from "../../redux/auth";
+import Link from 'next/link';
+import {
+  faEyeSlash,
+  faEye
+  } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 type Props = {};
 
 const Login = (props: Props) => {
@@ -34,6 +40,19 @@ const Login = (props: Props) => {
       toast.error(`${error.response.data.error}`);
     }
   };
+  //show/hiden
+ const [type, setType] = useState('password')
+ const [icon, setIcon] = useState(faEyeSlash)
+ const handleToggle = () =>{
+  if(type==='password'){
+    setIcon(faEye);
+    setType('text')
+  }
+  else{
+    setIcon(faEyeSlash);
+    setType('password')
+  }
+ }
   return (
     <div className="h-screen w-[1240px] mx-auto">
       <div className="px-6 h-full text-gray-800">
@@ -63,14 +82,16 @@ const Login = (props: Props) => {
                 )}
               </div>
 
-              <div className="mb-6">
+              <div className="mb-6 relative">
                 <input
-                  type="password"
+                  type={type}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Mật khẩu"
                   {...register("password", { required: true })}
                 />
+                <span className="absolute cursor-pointer bottom-[10px] right-[20px]" onClick={handleToggle}><FontAwesomeIcon icon={icon}/></span>
+                
                 {errors.password?.type === "required" && (
                   <span className="text-red-700">is required</span>
                 )}
@@ -97,12 +118,12 @@ const Login = (props: Props) => {
                   Đăng nhập
                 </button>
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                  <a
-                    href="#!"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                  <Link href="/register">
+                  <a className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
                   >
                     Đăng ký
                   </a>
+                  </Link>
                 </p>
               </div>
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">

@@ -55,14 +55,14 @@ const EditprdColor: NextPageWithLayout = (props: Props) => {
     return (
         <>
            <Head>
-                <title>Sửa Màu</title>
+                <title>Sửa Màu Sắc</title>
             </Head>
             <header className="z-10 fixed top-0 left-0 md:left-60 right-0 px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
                 <div className="flex items-center text-sm text-gray-600">
-                    <h5 className="relative pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
-                    Màu
+                    <h5 className="relative mb-0 pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
+                    Màu Sắc
                     </h5>
-                    <span>Edit Màu</span>
+                    <span>Sửa Màu Sắc</span>
                 </div>
                 <Link href="/admin/prdSizes">
                     <button
@@ -79,7 +79,7 @@ const EditprdColor: NextPageWithLayout = (props: Props) => {
                     <div className="shadow overflow-hidden sm:rounded-md">
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <span className="font-semibold mb-4 block text-xl">
-                                Thông tin chi tiết Màu:
+                                Thêm Màu Sắc:
                             </span>
                             <div className="grid grid-cols-6 gap-3">
                                 <div className="col-span-6">

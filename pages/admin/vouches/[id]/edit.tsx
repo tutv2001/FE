@@ -19,6 +19,7 @@ type Inputs = {
     code: string;
     status: string ;
     amount: number;
+    time:string;
     percent: number
 };
 
@@ -64,21 +65,21 @@ const AddUser: NextPageWithLayout = (props: Props) => {
     return (
         <>
             <Head>
-                <title>Add User</title>
+                <title>Sửa Mã Giảm Giá</title>
             </Head>
             <header className="z-10 fixed top-0 left-0 md:left-60 right-0 px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
                 <div className="flex items-center text-sm text-gray-600">
-                    <h5 className="relative pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
-                        Vouche
+                    <h5 className="relative mb-0 pr-5 after:content-[''] after:absolute after:w-[1px] after:h-4 after:top-1/2 after:-translate-y-1/2 after:right-2.5 after:bg-gray-300">
+                        Mã Giảm Giá
                     </h5>
-                    <span>Add Vouche</span>
+                    <span>Sửa Mã Giảm Giá </span>
                 </div>
                 <Link href="/admin/vouches">
                     <button
                         type="button"
                         className="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        DS Vouche
+                        Ds Mã Giảm Giá
                     </button>
                 </Link>
             </header>
@@ -88,7 +89,7 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                     <div className="shadow overflow-hidden sm:rounded-md">
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <span className="font-semibold mb-4 block text-xl">
-                                Thông tin chi tiết vouche:
+                                Sửa Mã Giảm Giá:
                             </span>
                             <div className="grid grid-cols-6 gap-3">
                                 <div className="col-span-6">
@@ -170,15 +171,15 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                                     </div>
                                 </div>
 
-                                {/* <div className="col-span-6 md:col-span-3">
+                                <div className="col-span-6 md:col-span-3">
                                     <label
                                         htmlFor="form__add-user-phone"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Thời gian tồn tại
+                                        Thời gian hết hạn()
                                     </label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         {...register("time", {
                                             required: "Vui lòng không bỏ trống",
                                         })}
@@ -189,7 +190,7 @@ const AddUser: NextPageWithLayout = (props: Props) => {
                                     <div className="text-sm mt-0.5 text-red-500">
                                         {errors.time?.message}
                                     </div>
-                                </div>                                                                                                                            */}
+                                </div>                                                                                                                             
                             </div>
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
